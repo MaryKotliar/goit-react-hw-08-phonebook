@@ -1,37 +1,64 @@
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { useSelector, useDispatch } from 'react-redux';
-import { Filter } from './Filter/Filter';
-import { Container } from './Container/Container';
 import { GlobalStyle } from './GlobalStyle';
-import { fetchContacts } from 'redux/contacts/operations';
-import { selectError, selectIsLoading } from 'redux/contacts/selectors';
+import { Layout } from './Layout';
+import Home from 'pages/Home/Home';
+import Login from 'pages/Login/Login';
+import Register from 'pages/Register/Register';
+import { Contacts } from 'pages/Contacts/Contacts';
+import { Route, Routes } from 'react-router-dom';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsRefreshing } from 'redux/auth/selectors';
+import { refreshUser } from 'redux/auth/operations';
 import { useEffect } from 'react';
-import { selectContacts } from 'redux/contacts/selectors';
-import { Loader } from './Loader/Loader';
-
+import { Toaster } from 'react-hot-toast';
 export function App() {
-  const contacts = useSelector(selectContacts);
-  const error = useSelector(selectError);
-  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-  return (
-    <Container>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      {contacts.length > 0 ? (
-        <Filter />
-      ) : (
-        'Your phonebook is empty. Add first contact!'
-      )}
+  const isRefreshing = useSelector(selectIsRefreshing);
 
-      {contacts.length > 0 && <ContactList />}
-      {isLoading && !error && <Loader />}
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<Register />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
+        </Route>
+      </Routes>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          // Define default options
+
+          duration: 5000,
+        }}
+      />
       <GlobalStyle />
-    </Container>
+    </>
   );
 }
