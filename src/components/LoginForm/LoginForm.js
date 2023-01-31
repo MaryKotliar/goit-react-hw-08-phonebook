@@ -2,6 +2,8 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import toast from 'react-hot-toast';
 
+import { TextField, Box, Button } from '@mui/material';
+
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = event => {
@@ -25,17 +27,41 @@ export const LoginForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <label>
+      <Box
+        component="form"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: 320,
+          mx: 'auto',
+        }}
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
+        <TextField
+          label="Email"
+          variant="outlined"
+          required
+          type="email"
+          name="email"
+          sx={{ mt: 2 }}
+        />
+        {/* <Text>
           Email
           <input type="email" name="email" required />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
+        </Text> */}
+        <TextField
+          label="Password"
+          variant="outlined"
+          required
+          type="password"
+          name="password"
+          sx={{ mt: 2 }}
+        />
+        <Button sx={{ mt: 2 }} variant="outlined" type="submit">
+          Log In
+        </Button>
+      </Box>
     </>
   );
 };

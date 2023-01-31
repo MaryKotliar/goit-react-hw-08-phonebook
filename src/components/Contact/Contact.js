@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import { Button, Wrapper } from './Contact.styled';
+import { Wrapper } from './Contact.styled';
 import { useDispatch } from 'react-redux';
 import { deleteContacts } from 'redux/contacts/operations';
-import { LoaderWatch } from 'components/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from 'redux/contacts/selectors';
 import { useState } from 'react';
+import { Typography, Button } from '@mui/material';
 export const Contact = ({ contact: { name, number, id } }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const dispatch = useDispatch();
@@ -16,15 +16,18 @@ export const Contact = ({ contact: { name, number, id } }) => {
   };
   return (
     <Wrapper>
-      <p>
+      <Typography variant="body1">
         {name}: {number}
-      </p>
+      </Typography>
       <Button
+        size="small"
         type="button"
         onClick={handleDelete}
         disabled={isDeleting && isLoading}
+        variant="outlined"
+        sx={{ ml: 2 }}
       >
-        Delete {isDeleting && <LoaderWatch />}
+        Delete
       </Button>
     </Wrapper>
   );

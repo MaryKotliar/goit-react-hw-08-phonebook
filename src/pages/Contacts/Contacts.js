@@ -8,6 +8,7 @@ import { selectError, selectIsLoading } from 'redux/contacts/selectors';
 import { useEffect } from 'react';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Loader } from 'components/Loader/Loader';
+import { Typography } from '@mui/material';
 
 export function Contacts() {
   const contacts = useSelector(selectContacts);
@@ -19,13 +20,26 @@ export function Contacts() {
   }, [dispatch]);
   return (
     <Container>
-      <h1>Phonebook</h1>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: 700, textAlign: 'center', mb: 2 }}
+      >
+        Phonebook
+      </Typography>
       <ContactForm />
-      <h2>Contacts</h2>
+      <Typography
+        variant="h5"
+        sx={{ fontWeight: 700, textAlign: 'center', mb: 2 }}
+      >
+        Contacts
+      </Typography>
       {contacts.length > 0 ? (
         <Filter />
       ) : (
-        'Your phonebook is empty. Add first contact!'
+        <Typography variant="subtitle2" sx={{ textAlign: 'center' }}>
+          {' '}
+          Your phonebook is empty. Add first contact!
+        </Typography>
       )}
 
       {contacts.length > 0 && <ContactList />}

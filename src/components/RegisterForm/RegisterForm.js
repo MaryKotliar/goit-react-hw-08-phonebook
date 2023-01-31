@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 
+import { TextField, Box, Button } from '@mui/material';
+
 import toast from 'react-hot-toast';
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -27,20 +29,44 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <label>
-        Username
-        <input type="text" name="name" required />
-      </label>
-      <label>
-        Email
-        <input type="email" name="email" required />
-      </label>
-      <label>
-        Password
-        <input type="password" name="password" required />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+    <Box
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      component="form"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: 320,
+        mx: 'auto',
+      }}
+    >
+      <TextField
+        label="Username"
+        variant="outlined"
+        required
+        type="text"
+        name="name"
+        sx={{ mt: 2 }}
+      />
+      <TextField
+        label="Email"
+        variant="outlined"
+        required
+        type="email"
+        name="email"
+        sx={{ mt: 2 }}
+      />
+      <TextField
+        label="Password"
+        variant="outlined"
+        required
+        type="password"
+        name="password"
+        sx={{ mt: 2 }}
+      />
+      <Button sx={{ mt: 2 }} variant="outlined" type="submit">
+        Register
+      </Button>
+    </Box>
   );
 };

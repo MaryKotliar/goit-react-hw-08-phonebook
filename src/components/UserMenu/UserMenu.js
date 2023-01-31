@@ -3,6 +3,8 @@ import { logOut } from 'redux/auth/operations';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
 import toast from 'react-hot-toast';
+import { Wrapper } from './UserMenu.styled';
+import { Button, Typography } from '@mui/material';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -15,11 +17,11 @@ export const UserMenu = () => {
   };
 
   return (
-    <div>
-      <p>Welcome, {user.name}</p>
-      <button type="button" onClick={onLogOut}>
+    <Wrapper>
+      <Typography variant="body1">Welcome, {user.name}</Typography>
+      <Button variant="outlined" type="button" onClick={onLogOut}>
         Logout
-      </button>
-    </div>
+      </Button>
+    </Wrapper>
   );
 };
