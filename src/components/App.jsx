@@ -53,8 +53,6 @@ export function App() {
       <Toaster
         position="top-center"
         toastOptions={{
-          // Define default options
-
           duration: 3000,
         }}
       />
