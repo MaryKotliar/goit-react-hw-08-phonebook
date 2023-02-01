@@ -1,8 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 import { TextField, Box, Button } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -24,7 +32,13 @@ export const LoginForm = () => {
       );
     form.reset();
   };
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handleClickShowPassword = () => setShowPassword(show => !show);
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
   return (
     <>
       <Box
@@ -47,14 +61,30 @@ export const LoginForm = () => {
           sx={{ mt: 2 }}
         />
 
-        <TextField
-          label="Password"
-          variant="outlined"
-          required
-          type="password"
-          name="password"
-          sx={{ mt: 2 }}
-        />
+        <FormControl sx={{ mt: 2, width: '320' }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            variant="outlined"
+            name="password"
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
         <Button sx={{ mt: 2 }} variant="outlined" type="submit">
           Log In
         </Button>

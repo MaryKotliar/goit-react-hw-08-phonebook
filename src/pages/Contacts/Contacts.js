@@ -32,6 +32,7 @@ export function Contacts() {
       >
         Contacts
       </Typography>
+
       {contacts.length > 0 ? (
         <Filter />
       ) : (

@@ -4,6 +4,7 @@ import { deleteContacts } from 'redux/contacts/operations';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from 'redux/contacts/selectors';
 import { useState } from 'react';
+import { LoaderWatch } from 'components/Loader/Loader';
 import { Typography, Button, Box } from '@mui/material';
 export const Contact = ({ contact: { name, number, id } }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -31,7 +32,7 @@ export const Contact = ({ contact: { name, number, id } }) => {
         variant="outlined"
         sx={{ ml: 2 }}
       >
-        Delete
+        Delete {isDeleting && <LoaderWatch />}
       </Button>
     </Box>
   );
