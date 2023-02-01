@@ -51,11 +51,11 @@ export function App() {
         </Route>
       </Routes>
       <Toaster
-        position="top-right"
+        position="top-center"
         toastOptions={{
           // Define default options
 
-          duration: 5000,
+          duration: 3000,
         }}
       />
       <GlobalStyle />

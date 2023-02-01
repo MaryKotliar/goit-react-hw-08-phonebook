@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
-import { Wrapper } from './Contact.styled';
 import { useDispatch } from 'react-redux';
 import { deleteContacts } from 'redux/contacts/operations';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from 'redux/contacts/selectors';
 import { useState } from 'react';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Box } from '@mui/material';
 export const Contact = ({ contact: { name, number, id } }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const dispatch = useDispatch();
@@ -15,7 +14,12 @@ export const Contact = ({ contact: { name, number, id } }) => {
     dispatch(deleteContacts(id));
   };
   return (
-    <Wrapper>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
       <Typography variant="body1">
         {name}: {number}
       </Typography>
@@ -29,7 +33,7 @@ export const Contact = ({ contact: { name, number, id } }) => {
       >
         Delete
       </Button>
-    </Wrapper>
+    </Box>
   );
 };
 

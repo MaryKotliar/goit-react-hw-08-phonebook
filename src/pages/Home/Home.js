@@ -1,12 +1,17 @@
+import { Typography, Container } from '@mui/material';
 export default function Home() {
   return (
-    <div>
-      <h1>
-        Welcome to the app "Phonebook"
-        <span role="img" aria-label="Greeting icon">
-          💁‍♀️
-        </span>
-      </h1>
-    </div>
+    <Container>
+      <Typography
+        variant="h3"
+        sx={{ textAlign: 'center', fontWeight: 700, color: 'coral' }}
+      >
+        Welcome to the app "Phonebook!"
+      </Typography>
+      <Typography variant="h5" sx={{ textAlign: 'center', fontWeight: 700 }}>
+        Here you can store a list of your contacts and manage them. Enjoy with
+        pleasure.
+      </Typography>
+    </Container>
   );
 }

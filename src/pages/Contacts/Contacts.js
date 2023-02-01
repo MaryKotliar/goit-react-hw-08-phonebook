@@ -2,13 +2,12 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
 import { Filter } from 'components/Filter/Filter';
-import { Container } from 'components/Container/Container';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectError, selectIsLoading } from 'redux/contacts/selectors';
 import { useEffect } from 'react';
 import { selectContacts } from 'redux/contacts/selectors';
 import { Loader } from 'components/Loader/Loader';
-import { Typography } from '@mui/material';
+import { Typography, Container } from '@mui/material';
 
 export function Contacts() {
   const contacts = useSelector(selectContacts);

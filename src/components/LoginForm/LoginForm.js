@@ -46,10 +46,7 @@ export const LoginForm = () => {
           name="email"
           sx={{ mt: 2 }}
         />
-        {/* <Text>
-          Email
-          <input type="email" name="email" required />
-        </Text> */}
+
         <TextField
           label="Password"
           variant="outlined"
