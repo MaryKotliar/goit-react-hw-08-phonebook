@@ -43,7 +43,7 @@ export function Contacts() {
       )}
 
       {contacts.length > 0 && <ContactList />}
-      {isLoading && !error && <Loader />}
+      {isLoading && !error && contacts.length === 0 && <Loader />}
     </Container>
   );
 }

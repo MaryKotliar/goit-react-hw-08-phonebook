@@ -24,10 +24,11 @@ export const LoaderWatch = () => {
       }}
     >
       <Watch
-        height="16"
-        width="16"
+        height="14"
+        width="14"
         radius="48"
         color="blue"
+        marginLeft="4"
         ariaLabel="watch-loading"
         wrapperStyle={{}}
         wrapperClassName=""

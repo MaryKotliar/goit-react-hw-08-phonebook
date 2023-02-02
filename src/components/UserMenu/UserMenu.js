@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 import { useSelector } from 'react-redux';
-import { selectUser } from 'redux/auth/selectors';
+import { selectUser, selectIsLoading, selectError } from 'redux/auth/selectors';
+import CircularProgress from '@mui/material/CircularProgress';
 import toast from 'react-hot-toast';
 
 import { Box, Button, Typography } from '@mui/material';
@@ -9,6 +10,8 @@ import { Box, Button, Typography } from '@mui/material';
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   const onLogOut = () => {
     dispatch(logOut())
       .unwrap()
@@ -29,6 +32,7 @@ export const UserMenu = () => {
         variant="outlined"
         type="button"
         onClick={onLogOut}
+        disabled={isLoading}
         sx={{
           ml: 1,
           backgroundColor: 'white',
@@ -37,7 +41,7 @@ export const UserMenu = () => {
           },
         }}
       >
-        Logout
+        Logout{isLoading && !error && <CircularProgress size={12} />}
       </Button>
     </Box>
   );

@@ -2,6 +2,7 @@ import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
 import Home from 'pages/Home/Home';
 import Login from 'pages/Login/Login';
+import NotFound from './NotFound';
 import Register from 'pages/Register/Register';
 import { Contacts } from 'pages/Contacts/Contacts';
 import { Route, Routes } from 'react-router-dom';
@@ -12,6 +13,7 @@ import { selectIsRefreshing } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
+
 export function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -49,6 +51,7 @@ export function App() {
             }
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster
         position="top-center"
