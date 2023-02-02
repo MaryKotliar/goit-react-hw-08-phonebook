@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
-
+import { FormHelperText } from '@mui/material';
 import { TextField, Box, Button } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
@@ -59,6 +59,9 @@ export const LoginForm = () => {
           type="email"
           name="email"
           sx={{ mt: 2 }}
+          inputProps={{
+            pattern: '^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+.)+[A-Za-z]+$',
+          }}
         />
 
         <FormControl sx={{ mt: 2, width: '320' }} variant="outlined">
@@ -84,6 +87,9 @@ export const LoginForm = () => {
             }
             label="Password"
           />
+          <FormHelperText>
+            Password must contain numbers and letters
+          </FormHelperText>
         </FormControl>
         <Button sx={{ mt: 2 }} variant="outlined" type="submit">
           Log In
@@ -92,3 +98,6 @@ export const LoginForm = () => {
     </>
   );
 };
+
+// [a-zA-Z0-9+_. -]
+// /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;

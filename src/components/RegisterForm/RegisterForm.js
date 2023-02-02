@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import { useState } from 'react';
-import { TextField, Box, Button } from '@mui/material';
+import { TextField, Box, Button, FormHelperText } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import IconButton from '@mui/material/IconButton';
@@ -89,6 +89,9 @@ export const RegisterForm = () => {
           }
           label="Password"
         />
+        <FormHelperText>
+          Password must contain numbers and letters
+        </FormHelperText>
       </FormControl>
       <Button sx={{ mt: 2 }} variant="outlined" type="submit">
         Register

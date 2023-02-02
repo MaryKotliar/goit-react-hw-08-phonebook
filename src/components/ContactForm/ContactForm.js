@@ -1,12 +1,19 @@
 import { nanoid } from 'nanoid';
-
+import { LoaderWatch } from 'components/Loader/Loader';
 import { useState, useEffect } from 'react';
 import { selectContacts } from 'redux/contacts/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contacts/operations';
-import { LoaderWatch } from 'components/Loader/Loader';
+
 import { selectIsLoading } from 'redux/contacts/selectors';
-import { TextField, Box, Button, Alert, AlertTitle } from '@mui/material';
+import {
+  TextField,
+  Box,
+  Button,
+  Alert,
+  AlertTitle,
+  FormHelperText,
+} from '@mui/material';
 
 const nameInputId = nanoid();
 const numberInputId = nanoid();
@@ -63,6 +70,7 @@ export const ContactForm = () => {
           {name} is already in contacts. Enter another name
         </Alert>
       )}
+
       <Box
         onSubmit={handleSubmit}
         component="form"
@@ -101,11 +109,19 @@ export const ContactForm = () => {
           name="number"
           sx={{ mt: 2 }}
           value={number}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          inputMode="numeric"
+          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           id={numberInputId}
           onChange={handleChange}
+          inputProps={{
+            inputMode: 'numeric',
+            pattern: '[0-9]*',
+          }}
         />
+        <FormHelperText>
+          Phone number must contain only numbers from 0 to 9 without spaces
+        </FormHelperText>
 
         <Button
           type="submit"
